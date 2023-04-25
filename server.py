@@ -391,7 +391,7 @@ def bad_request(_):
 def main() -> None:
     db_session.global_init("db/app.db")
     app.register_blueprint(api.blueprint)
-    app.run(debug=True)
+    app.run()
 
 
 if __name__ == "__main__":

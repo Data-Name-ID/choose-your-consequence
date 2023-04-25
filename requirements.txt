@@ -3,3 +3,4 @@ SQLAlchemy
 Flask-Login
 Flask-WTF
 Pillow
+SQLAlchemy-serializer
