@@ -62,7 +62,7 @@ def get_user_questions(id):
     )
 
 @blueprint.route("/api/user/<int:id>/comments", methods=["GET"])
-def get_user_questions(id):
+def get_user_comments(id):
     db_sess = db_session.create_session()
     comments = db_sess.query(Comment).filter(Comment.user_id == id)
 
