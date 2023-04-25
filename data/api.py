@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify
 from data import db_session
 from data.questions import Question
 from data.comments import Comment
+from data.users import User
 
 blueprint = Blueprint("api", __name__, template_folder="templates")
 
@@ -44,19 +45,19 @@ def get_question(id):
         }
     )
 
-@blueprint.route("/api/user/<int:id>/questions", methods=["GET"])
+@blueprint.route("/api/user/<int:id>/answers", methods=["GET"])
 def get_user_questions(id):
     db_sess = db_session.create_session()
-    questions = db_sess.query(Question).filter(Question.user_id == id)
+    user = db_sess.query(User).get(id)
 
-    if not questions:
+    if not user:
         return jsonify({"error": "Not found"})
 
     return jsonify(
         {
             "questions": [
-                question.to_dict(only=("id", "text", "choice_1", "choice_2", "created_date"))
-                for question in questions
+                question.to_dict(only=("id", "answer", "answered_date", "user_id", "question_id"))
+                for question in user.answers
             ]
         }
     )

@@ -287,8 +287,12 @@ def result(id, answer):
     answer_2 = (
         db_sess.query(Answer).filter_by(question_id=id, answer=2).count()
     )
+    
+    try:
+        per_1 = answer_1 * 100 // (answer_1 + answer_2)
+    except ZeroDivisionError:
+        per_1 = 0
 
-    per_1 = answer_1 * 100 // (answer_1 + answer_2)
     per_2 = 100 - per_1
 
     return render_template(
@@ -389,6 +393,9 @@ def bad_request(_):
 
 
 def main() -> None:
+    if not os.path.exists('db'):
+        os.makedirs('db')
+
     db_session.global_init("db/app.db")
     app.register_blueprint(api.blueprint)
     app.run()
