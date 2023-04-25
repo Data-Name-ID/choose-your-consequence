@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block main %}
+<h1 class="text-center">Choose Your Consequence</h1>
+{% if question %}
+<div class="border rounded p-3 mt-3">
+  <p class="fw-medium">{{question.text}}</p>
+  <a
+    class="text-decoration-none d-block border border-2 rounded p-2 border-primary"
+    href="/{{question.id}}/1/res"
+    >{{question.choice_1}}</a
+  >
+  <p class="my-3">ИЛИ</p>
+  <a
+    class="text-decoration-none d-block border border-2 rounded p-2 border-primary"
+    href="/{{question.id}}/2/res"
+    >{{question.choice_2}}</a
+  >
+</div>
+{% else %}
+<div class="alert alert-warning mt-3" role="alert">Вы ответили на все доступные вопросы, не отчаивайтесь, скоро база вопросов пополнится!</div>
+{% endif %}
+{% endblock %}

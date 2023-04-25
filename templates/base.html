@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+      <ul class="mx-auto navbar-nav align-items-center">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Главная</a>
+        </li>
+        {% if current_user.is_authenticated and current_user.admin == True %}
+        <li class="nav-item active">
+          <a class="nav-link" href="/admin">Администрирование</a>
+        </li>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+        <li class="nav-item active">
+          <a class="nav-link" href="/lk"><img style="width: 40px; height: 40px;" class="bg-info rounded-circle" src="/static/avatars/{{ current_user.id }}.png" alt="avatar"></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/logout">Выход</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Регистрация</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Войти</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    <main class="container">
+      {% block main %}{% endblock %}
+    </main>
+    {% block script %}{% endblock %}
+  </body>
+</html>

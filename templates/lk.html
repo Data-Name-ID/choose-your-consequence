@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block main %}
+<h1 class="text-center">Аккаунт</h1>
+{% for answer in answers %}
+<div class="border rounded p-3 mt-3">
+  <a href="/{{answer.question_id}}/{{answer.answer}}/res" class="text-decoration-none text-dark">
+    <p>
+      <span class="fw-bold">Вопрос #{{answer.question.id}}:</span>
+      {{answer.question.text}}
+    </p>
+    <p
+      class="border border-2 rounded p-2 {% if answer.answer == 1 %}border-success{% else %}border-danger{% endif %}"
+    >
+      {{answer.question.choice_1}}
+    </p>
+    <p
+      class="border border-2 rounded p-2 mb-0 {% if answer.answer == 2 %}border-success{% else %}border-danger{% endif %}"
+    >
+      {{answer.question.choice_2}}
+    </p>
+  </a>
+</div>
+{% endfor %} {% endblock %}

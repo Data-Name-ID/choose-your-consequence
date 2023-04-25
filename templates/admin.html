@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block main %}
+<h1 class="text-center">Панель администратора</h1>
+<div class="d-flex mt-3">
+  <a href="/add/question" class="btn btn-primary">Добавить новый вопрос</a>
+</div>
+{% for question in questions %}
+<div class="border rounded p-3 mt-3 question">
+  <a href="/{{question.id}}" class="text-decoration-none text-dark">
+    <p>
+      <span class="fw-bold">Вопрос #{{question.id}}:</span>
+      {{question.text}}
+    </p>
+    <p class="border border-2 rounded p-2">{{question.choice_1}}</p>
+    <p class="border border-2 rounded p-2 mb-0">{{question.choice_2}}</p>
+  </a>
+  <div class="d-flex mt-3">
+    <a href="/edit/question/{{question.id}}" class="btn btn-primary me-3"
+      >Изменить</a
+    >
+    <a style="cursor: pointer;" class="btn btn-danger delete-question" question-id="{{question.id}}"
+      >Удалить</a
+    >
+  </div>
+</div>
+{% endfor %} {% endblock %} {% block script %}
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script>
+  $(".delete-question").click(function (event) {
+    var thisLike = this;
+
+    $.ajax({
+      url: "/delete/question/" + $(thisLike).attr("question-id"),
+      type: "GET",
+      success: function (response) {
+        $(thisLike).closest(".question").remove();
+      },
+    });
+  });
+</script>
+
+{% endblock %}

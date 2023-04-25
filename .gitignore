@@ -1,3 +1,8 @@
+# Our files
+str_count.py
+config.py
+app.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

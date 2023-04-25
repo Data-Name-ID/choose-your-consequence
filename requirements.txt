@@ -1,0 +1,5 @@
+flask
+SQLAlchemy
+Flask-Login
+Flask-WTF
+Pillow
