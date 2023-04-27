@@ -131,7 +131,7 @@ def edit_question(id):
 @login_required
 def delete_question(id: int):
     """
-    Подключение к юызе данных
+    Подключение к базе данных
     Args:
         id (int): Если вопрос существует в бузе данных 
     Returns:
