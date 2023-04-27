@@ -1,4 +1,4 @@
-# Модель пользователей
+"""Модель пользователей"""
 import datetime
 import sqlalchemy
 
@@ -11,6 +11,19 @@ from sqlalchemy_serializer import SerializerMixin
 
 
 class User(SqlAlchemyBase, UserMixin, SerializerMixin):
+    """
+    Модель вопросов
+
+    Содержит следующие поля:
+      - id
+      - text
+      - choice_1
+      - choice_2
+      - created_date
+      - comments (relationship)
+      - answers (relationship)
+    """
+
     __tablename__ = "users"
 
     id = sqlalchemy.Column(

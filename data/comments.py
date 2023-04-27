@@ -1,4 +1,4 @@
-# Модель комментариев
+"""Модель комментариев"""
 import datetime
 import sqlalchemy
 
@@ -8,6 +8,21 @@ from sqlalchemy_serializer import SerializerMixin
 
 
 class Comment(SqlAlchemyBase, SerializerMixin):
+    """
+    Модель комментариев пользователей
+
+    Содержит следующие поля:
+      - id
+      - text
+      - created_date
+      - user_id
+      - user (relationship)
+      - question_id
+      - question (relationship)
+      - likes (relationship)
+      - likes_count
+    """
+
     __tablename__ = "comments"
 
     id = sqlalchemy.Column(
@@ -32,9 +47,7 @@ class Comment(SqlAlchemyBase, SerializerMixin):
     )
     question = orm.relationship("Question", back_populates="comments")
 
-    likes = orm.relationship(
-        "Like", back_populates="comment"
-    )
+    likes = orm.relationship("Like", back_populates="comment")
     likes_count = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
     def update_likes_count(self):

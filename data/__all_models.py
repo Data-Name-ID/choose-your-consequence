@@ -1,4 +1,4 @@
-# Все модели
+"""Подключение всех моделей к проекту"""
 from . import users
 from . import questions
 from . import answers

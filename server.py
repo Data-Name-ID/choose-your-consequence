@@ -35,6 +35,7 @@ app.config["SECRET_KEY"] = SECRET_KEY
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
 # Функция для сохранения изображения профиля пользоввателя
 def save_image(photo, file_path):
     img = Image.open(photo)
@@ -52,6 +53,7 @@ def save_image(photo, file_path):
 def load_user(user_id):
     db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
+
 
 # Дбавление вопросов
 @app.route("/add/question", methods=["GET", "POST"])
@@ -79,6 +81,7 @@ def add_question():
     return render_template(
         "add-question.html", title="Создание вопроса", form=form
     )
+
 
 # Изменение вопросов
 @app.route("/edit/question/<int:id>", methods=["GET", "POST"])
@@ -112,6 +115,7 @@ def edit_question(id):
         "add-question.html", title="Измение вопроса", form=form
     )
 
+
 # Удаление вопросов
 @app.route("/delete/question/<int:id>")
 @login_required
@@ -127,6 +131,7 @@ def delete_question(id: int):
     db_sess.commit()
 
     return "Ok"
+
 
 # Обновление количества лайков
 @app.route("/add/like/comment/<int:id>", methods=["GET"])
@@ -152,6 +157,7 @@ def like(id):
 
     return jsonify(comment.likes_count)
 
+
 # Удаление комментариев
 @app.route("/delete/comment/<int:id>")
 @login_required
@@ -166,6 +172,7 @@ def delete_comment(id: int):
     db_sess.commit()
 
     return jsonify(db_sess.query(Comment).count())
+
 
 # Личный кабинет
 @app.route("/lk")
@@ -185,6 +192,7 @@ def lk():
         ),
     )
 
+
 # Раздел администрирования
 @app.route("/admin")
 @login_required
@@ -200,6 +208,7 @@ def admin_panel():
         title="Администрирование",
         questions=questions,
     )
+
 
 # Переадресация на главную страницу с вопросами
 @app.route("/")
@@ -224,8 +233,11 @@ def index():
         question = db_sess.query(Question).order_by(func.random()).first()
 
     return render_template(
-        "index.html", title=f'Вопрос #{question.id}' if question else 'Вопросы закончились', question=question
+        "index.html",
+        title=f"Вопрос #{question.id}" if question else "Вопросы закончились",
+        question=question,
     )
+
 
 # Открыть определённый вопрос по id
 @app.route("/<int:id>")
@@ -236,6 +248,7 @@ def get_question(id):
     return render_template(
         "index.html", title=f"Вопрос #{id}", question=question
     )
+
 
 # Страничка с результатом ответов
 @app.route("/<int:id>/<int:answer>/res", methods=["GET", "POST"])
@@ -288,7 +301,7 @@ def result(id, answer):
     answer_2 = (
         db_sess.query(Answer).filter_by(question_id=id, answer=2).count()
     )
-    
+
     try:
         per_1 = answer_1 * 100 // (answer_1 + answer_2)
     except ZeroDivisionError:
@@ -308,6 +321,7 @@ def result(id, answer):
         per_2=per_2,
         form=form,
     )
+
 
 # Регистрация
 @app.route("/register", methods=["GET", "POST"])
@@ -350,6 +364,7 @@ def reqister():
 
     return render_template("register.html", title="Регистрация", form=form)
 
+
 # Вход в аккаунт
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -387,6 +402,7 @@ def logout():
 def bad_request(_):
     return redirect("/login")
 
+
 # Сообщение об ошибке
 @app.errorhandler(404)
 def bad_request(_):
@@ -394,8 +410,8 @@ def bad_request(_):
 
 
 def main() -> None:
-    if not os.path.exists('db'):
-        os.makedirs('db')
+    if not os.path.exists("db"):
+        os.makedirs("db")
 
     db_session.global_init("db/app.db")
     app.register_blueprint(api.blueprint)

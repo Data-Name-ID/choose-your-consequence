@@ -1,4 +1,4 @@
-# Модель лайков
+"""Модель лайков"""
 import sqlalchemy
 from sqlalchemy import orm
 
@@ -7,12 +7,23 @@ from sqlalchemy_serializer import SerializerMixin
 
 
 class Like(SqlAlchemyBase, SerializerMixin):
+    """
+    Модель лайков пользователей
+
+    Содержит следующие поля:
+      - id
+      - comment_id
+      - comment (relationship)
+      - user_id
+      - user (relationship)
+    """
+
     __tablename__ = "likes"
 
     id = sqlalchemy.Column(
         sqlalchemy.Integer, primary_key=True, autoincrement=True
     )
-    count = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    count = sqlalchemy.Column(sqlalchemy.Integer, default=0)  # поле оставлено для совместимости
 
     comment_id = sqlalchemy.Column(
         sqlalchemy.Integer,

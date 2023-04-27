@@ -1,4 +1,4 @@
-# Модель ответов
+"""Модель ответов"""
 import datetime
 import sqlalchemy
 
@@ -8,6 +8,18 @@ from sqlalchemy_serializer import SerializerMixin
 
 
 class Answer(SqlAlchemyBase, SerializerMixin):
+    """
+    Модель ответов пользователей
+    
+    Содержит следующие поля:
+      - id
+      - answer
+      - answered_date
+      - user_id
+      - user (relationship)
+      - question_id
+      - question (relationship)
+    """
     __tablename__ = "answers"
 
     id = sqlalchemy.Column(
