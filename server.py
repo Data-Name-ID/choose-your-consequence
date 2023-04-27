@@ -31,7 +31,7 @@ import os
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = SECRET_KEY
-app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -134,7 +134,7 @@ def delete_question(id: int):
     """
     Подключение к базе данных
     Args:
-        id (int): Если вопрос существует в бузе данных 
+        id (int): Если вопрос существует в бузе данных
     Returns:
         _type_: Удаление выбранного вопроса
     """
@@ -418,10 +418,11 @@ def reqister():
 
     return render_template("register.html", title="Регистрация", form=form)
 
+
 # Информация о сайте
-@app.route('/info')
+@app.route("/info")
 def info():
-    return render_template('info.html')
+    return render_template("info.html")
 
 
 # Вход в аккаунт
@@ -451,9 +452,11 @@ def login():
 
     return render_template("login.html", title="Авторизация", form=form)
 
-@app.route("/info_api")
+
+@app.route("/api")
 def info_api():
-    return render_template('api_info.html')
+    return render_template("api.html")
+
 
 @app.route("/logout")
 @login_required
