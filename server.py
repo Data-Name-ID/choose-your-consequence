@@ -57,6 +57,9 @@ def load_user(user_id):
 @app.route("/add/question", methods=["GET", "POST"])
 @login_required
 def add_question():
+    """
+    Подключаем форму и интерфейс и добавляем вопрос
+    """
     if not current_user.admin:
         abort(401)
 
@@ -84,6 +87,13 @@ def add_question():
 @app.route("/edit/question/<int:id>", methods=["GET", "POST"])
 @login_required
 def edit_question(id):
+    """
+    подключаем форму и интерфейс
+    Args:
+        id (_type_): Если вопрос существует в базе данных
+    Returns:
+        _type_: Изменение вопроса
+    """
     if not current_user.admin:
         abort(401)
 
@@ -116,6 +126,13 @@ def edit_question(id):
 @app.route("/delete/question/<int:id>")
 @login_required
 def delete_question(id: int):
+    """
+    Подключение к юызе данных
+    Args:
+        id (int): Если вопрос существует в бузе данных 
+    Returns:
+        _type_: Удаление выбранного вопроса
+    """
     if not current_user.admin:
         abort(401)
 
@@ -132,6 +149,13 @@ def delete_question(id: int):
 @app.route("/add/like/comment/<int:id>", methods=["GET"])
 @login_required
 def like(id):
+    """
+    Получене данных
+    Args:
+        id (_type_): Проверка id лайка и комментария
+    Returns:
+        _type_: Добавление или убывание лайка
+    """
     db_sess = db_session.create_session()
 
     comment = db_sess.query(Comment).get(id)
@@ -156,6 +180,11 @@ def like(id):
 @app.route("/delete/comment/<int:id>")
 @login_required
 def delete_comment(id: int):
+    """
+    Получение данных
+    Args:
+        id (int): Если айди комментария верный и комментарий принадлежит пользователю
+    """
     db_sess = db_session.create_session()
     comment = db_sess.query(Comment).get(id)
 
@@ -171,6 +200,11 @@ def delete_comment(id: int):
 @app.route("/lk")
 @login_required
 def lk():
+    """
+    Открытие личного кабинета
+    Returns:
+        _type_: Личный кабинет
+    """
     db_sess = db_session.create_session()
     answers = (
         db_sess.query(Answer).filter(Answer.user_id == current_user.id).all()
@@ -189,6 +223,9 @@ def lk():
 @app.route("/admin")
 @login_required
 def admin_panel():
+    """
+    Открытие панели администрирования
+    """
     if not current_user.admin:
         abort(401)
 
@@ -204,6 +241,11 @@ def admin_panel():
 # Переадресация на главную страницу с вопросами
 @app.route("/")
 def index():
+    """
+    Главная страница с выбором
+    Returns:
+        _type_: Вопрос
+    """
     db_sess = db_session.create_session()
 
     if current_user.is_authenticated:
@@ -230,6 +272,14 @@ def index():
 # Открыть определённый вопрос по id
 @app.route("/<int:id>")
 def get_question(id):
+    """
+    Вывод определённого вопроса
+    Args:
+        id (_type_): Если айди есть в базе
+
+    Returns:
+        _type_: Вопрос
+    """
     db_sess = db_session.create_session()
     question = db_sess.query(Question).get(id)
 
@@ -312,6 +362,9 @@ def result(id, answer):
 # Регистрация
 @app.route("/register", methods=["GET", "POST"])
 def reqister():
+    """
+    Регестрационное поле с проверкой на то что все данные введены верно
+    """
     form = RegisterForm()
 
     if form.validate_on_submit():
@@ -350,9 +403,18 @@ def reqister():
 
     return render_template("register.html", title="Регистрация", form=form)
 
+# Информация о сайте
+@app.route('/info')
+def info():
+    return render_template('info.html')
+
+
 # Вход в аккаунт
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    Вход в аккаунт с проверкай на правильность введённых данных
+    """
     form = LoginForm()
 
     if form.validate_on_submit():
