@@ -1,3 +1,4 @@
+# Модель пользователей
 import datetime
 import sqlalchemy
 

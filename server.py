@@ -1,3 +1,4 @@
+# Импорты
 from flask import (
     Flask,
     render_template,
@@ -34,7 +35,7 @@ app.config["SECRET_KEY"] = SECRET_KEY
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-
+# Функция для сохранения изображения профиля пользоввателя
 def save_image(photo, file_path):
     img = Image.open(photo)
 
@@ -52,7 +53,7 @@ def load_user(user_id):
     db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
 
-
+# Дбавление вопросов
 @app.route("/add/question", methods=["GET", "POST"])
 @login_required
 def add_question():
@@ -79,7 +80,7 @@ def add_question():
         "add-question.html", title="Создание вопроса", form=form
     )
 
-
+# Изменение вопросов
 @app.route("/edit/question/<int:id>", methods=["GET", "POST"])
 @login_required
 def edit_question(id):
@@ -111,7 +112,7 @@ def edit_question(id):
         "add-question.html", title="Измение вопроса", form=form
     )
 
-
+# Удаление вопросов
 @app.route("/delete/question/<int:id>")
 @login_required
 def delete_question(id: int):
@@ -127,7 +128,7 @@ def delete_question(id: int):
 
     return "Ok"
 
-
+# Обновление количества лайков
 @app.route("/add/like/comment/<int:id>", methods=["GET"])
 @login_required
 def like(id):
@@ -151,7 +152,7 @@ def like(id):
 
     return jsonify(comment.likes_count)
 
-
+# Удаление комментариев
 @app.route("/delete/comment/<int:id>")
 @login_required
 def delete_comment(id: int):
@@ -166,7 +167,7 @@ def delete_comment(id: int):
 
     return jsonify(db_sess.query(Comment).count())
 
-
+# Личный кабинет
 @app.route("/lk")
 @login_required
 def lk():
@@ -184,7 +185,7 @@ def lk():
         ),
     )
 
-
+# Раздел администрирования
 @app.route("/admin")
 @login_required
 def admin_panel():
@@ -200,7 +201,7 @@ def admin_panel():
         questions=questions,
     )
 
-
+# Переадресация на главную страницу с вопросами
 @app.route("/")
 def index():
     db_sess = db_session.create_session()
@@ -226,7 +227,7 @@ def index():
         "index.html", title=f'Вопрос #{question.id}' if question else 'Вопросы закончились', question=question
     )
 
-
+# Открыть определённый вопрос по id
 @app.route("/<int:id>")
 def get_question(id):
     db_sess = db_session.create_session()
@@ -236,7 +237,7 @@ def get_question(id):
         "index.html", title=f"Вопрос #{id}", question=question
     )
 
-
+# Страничка с результатом ответов
 @app.route("/<int:id>/<int:answer>/res", methods=["GET", "POST"])
 def result(id, answer):
     db_sess = db_session.create_session()
@@ -308,7 +309,7 @@ def result(id, answer):
         form=form,
     )
 
-
+# Регистрация
 @app.route("/register", methods=["GET", "POST"])
 def reqister():
     form = RegisterForm()
@@ -349,7 +350,7 @@ def reqister():
 
     return render_template("register.html", title="Регистрация", form=form)
 
-
+# Вход в аккаунт
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
@@ -386,7 +387,7 @@ def logout():
 def bad_request(_):
     return redirect("/login")
 
-
+# Сообщение об ошибке
 @app.errorhandler(404)
 def bad_request(_):
     return render_template("404.html", title="Страница не найдена")

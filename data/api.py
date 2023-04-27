@@ -1,3 +1,4 @@
+# API
 from flask import Blueprint, jsonify
 from data import db_session
 from data.questions import Question
@@ -6,7 +7,7 @@ from data.users import User
 
 blueprint = Blueprint("api", __name__, template_folder="templates")
 
-
+# Получить все вопросы
 @blueprint.route("/api/questions", methods=["GET"])
 def get_questions():
     db_sess = db_session.create_session()
@@ -24,7 +25,7 @@ def get_questions():
         }
     )
 
-
+# Все вопросы определённого пользователя
 @blueprint.route("/api/question/<int:id>", methods=["GET"])
 def get_question(id):
     db_sess = db_session.create_session()
@@ -44,7 +45,7 @@ def get_question(id):
             }
         }
     )
-
+# Все ответы определённого пользователя
 @blueprint.route("/api/user/<int:id>/answers", methods=["GET"])
 def get_user_questions(id):
     db_sess = db_session.create_session()
@@ -61,7 +62,7 @@ def get_user_questions(id):
             ]
         }
     )
-
+# Все комментарии определённого пользователя
 @blueprint.route("/api/user/<int:id>/comments", methods=["GET"])
 def get_user_comments(id):
     db_sess = db_session.create_session()

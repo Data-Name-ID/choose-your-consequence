@@ -1,3 +1,4 @@
+# Модель комментариев
 import datetime
 import sqlalchemy
 

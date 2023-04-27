@@ -1,3 +1,4 @@
+# Модель лайков
 import sqlalchemy
 from sqlalchemy import orm
 
