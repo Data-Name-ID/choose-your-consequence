@@ -1,6 +1,6 @@
 # Choose Your Consequence | Проект Яндекс Лицей
 
-## [Ссылка на сайт](https://your-consequence.glitch.me/)
+## [Ссылка на сайт](https://choose-consequence.glitch.me/)
 
 ## Содержание
 0. [Инструкция по установке и запуску](#0-инструкция-по-установке-и-запуску)
