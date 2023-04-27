@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block main %}
+<div>
+    <a>'/api/questions'
+    Возвращает json объект со всеми вопросами, внесёнными в базу данных
+
+    Формат ответа:
+    {
+        'questions': [
+            {
+                'id': ...,              (int)
+                'text': ...,            (str)
+                'choice_1': ...,        (str)
+                'choice_2': ...,        (str)
+                'created_date': ...     (datetime)
+            }, ...
+        ]
+    }
+
+    В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}</a>
+</div>
+<div>
+    '/api/users'
+    Возвращает json объект со всеми пользователями, зарегистрированными в системе
+
+    Формат ответа:
+    {
+        'users': [
+            {
+                'id': ...,                  (int)
+                'name': ...,                (str)
+                'email': ...,               (str)
+                'created_date': ...,        (datetime)
+                'admin': ...                (int)
+            }, ...
+        ]
+    }
+
+    В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}
+</div>
+
+
+{% endblock %}
