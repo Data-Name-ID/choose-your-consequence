@@ -450,6 +450,9 @@ def login():
 
     return render_template("login.html", title="Авторизация", form=form)
 
+@app.route("/info_api")
+def info_api():
+    return render_template('api_info.html')
 
 @app.route("/logout")
 @login_required
