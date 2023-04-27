@@ -3,6 +3,7 @@ from flask import Blueprint, jsonify
 from data import db_session
 from data.questions import Question
 from data.likes import Like
+from data.answers import Answer
 from data.comments import Comment
 from data.users import User
 
@@ -86,6 +87,50 @@ def get_users():
         return jsonify({"error": "Not found"})
 
     return jsonify({"users": [__get_user_dict(user) for user in users]})
+
+
+@blueprint.route("/api/answers", methods=["GET"])
+def get_answers():
+    """
+    Возвращает json объект со всеми ответами, внесёнными в базу данных
+
+    Формат ответа:
+    {
+        'answers': [
+            {
+                'id': ...,                  (int)
+                'answer': ...,              (int)
+                'question_id': ...,         (int)
+                'answered_date': ...,       (datetime)
+                'user_id': ...              (int)
+            }, ...
+        ]
+    }
+
+    В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}
+    """
+    db_sess = db_session.create_session()
+    answers = db_sess.query(Answer).all()
+
+    if not answers:
+        return jsonify({"error": "Not found"})
+
+    return jsonify(
+        {
+            "answers": [
+                answer.to_dict(
+                    only=(
+                        "id",
+                        "answer",
+                        "answered_date",
+                        "user_id",
+                        "question_id",
+                    )
+                )
+                for answer in answers
+            ]
+        }
+    )
 
 
 @blueprint.route("/api/question/<int:id>", methods=["GET"])
