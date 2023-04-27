@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block main %}
-<div>
+<h1 class="text-center">Документация по API</h1>
+<div class="mt-3">
     <h2><a href="/api/questions">/api/questions</a></h2>
     <h3 class="h4">Возвращает json объект со всеми вопросами, внесёнными в базу данных</h3>
 
@@ -20,7 +21,7 @@
 
 
 
-<div>
+<div class="mt-3">
     <h2><a href="/api/users">/api/users</a></h2>
     <h3 class="h4">Возвращает json объект со всеми пользователями, зарегистрированными в системе</h3>
 
@@ -41,8 +42,8 @@
 
 
 
-<div>
-    <h2>/api/answers</h2>
+<div class="mt-3">
+    <h2><a href="/api/answers">/api/answers</a></h2>
     <h3 class="h4">Возвращает json объект со всеми ответами, внесёнными в базу данных</h3>
     <h5>Обазательный агрумент: id пользователя</h5>
     <p style="white-space: pre;" class="mb-0"><span class="fw-bold">Формат ответа:</span>
@@ -62,7 +63,7 @@
 </div>
 
 
-<div>
+<div class="mt-3">
     <h2>/api/question/&lt;int:id&gt;</h2>
     <h3 class="h4">Возвращает json, содержащий информацию о конкретном вопросе</h3>
     <h5>Обазательный агрумент: id вопроса</h5>
@@ -83,7 +84,7 @@
 
 
 
-<div>
+<div class="mt-3">
     <h2>/api/user/&lt;int:id&gt;</h2>
     <h3 class="h4">Возвращает json, содержащий информацию о конкретном пользователе</h3>
     <h5>Обазательный агрумент: id пользователя</h5>
@@ -102,7 +103,7 @@
 
 
 
-<div>
+<div class="mt-3">
     <h2>/api/user/&lt;int:id&gt;/answers</h2>
     <h3 class="h4">Возвращает json объект со всеми ответами, которые оставил пользователь</h3>
     <h5>Обазательный агрумент: id пользователя</h5>
@@ -130,7 +131,7 @@
 
 
 
-<div>
+<div class="mt-3">
     <h2>/api/user/&lt;int:id&gt;/comments</h2>
     <h3 class="h4">Возвращает json объект со всеми комментариями, которые оставил конкретный пользователь</h3>
     <h5>Обазательный агрумент: id пользователя</h5>
@@ -160,7 +161,7 @@
 
 
 
-<div>
+<div class="mt-3">
     <h2>/api/user/&lt;int:id&gt;/likes</h2>
     <h3 class="h4">Возвращает json объект со всеми лайками, которые оставил конкретный пользователь</h3>
     <h5>Обазательный агрумент: id пользователя</h5>
