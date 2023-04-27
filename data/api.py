@@ -107,7 +107,7 @@ def get_answers():
         ]
     }
 
-    В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}
+    В случае отсутствия ответов возвращает ответ: {'error': 'Not found'}
     """
     db_sess = db_session.create_session()
     answers = db_sess.query(Answer).all()

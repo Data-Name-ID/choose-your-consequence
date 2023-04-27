@@ -42,6 +42,27 @@
 
 
 <div>
+    <h2>/api/answers</h2>
+    <h3 class="h4">Возвращает json объект со всеми ответами, внесёнными в базу данных</h3>
+    <h5>Обазательный агрумент: id пользователя</h5>
+    <p style="white-space: pre;" class="mb-0"><span class="fw-bold">Формат ответа:</span>
+    {
+        'answers': [
+            {
+                'id': ...,                  (int)
+                'answer': ...,              (int)
+                'question_id': ...,         (int)
+                'answered_date': ...,       (datetime)
+                'user_id': ...              (int)
+            }, ...
+        ]
+    }
+    </p>
+    <p class="text-secondary">В случае отсутствия лайков возвращает ответ: {'error': 'Not found'}</p>
+</div>
+
+
+<div>
     <h2>/api/question/&lt;int:id&gt;</h2>
     <h3 class="h4">Возвращает json, содержащий информацию о конкретном вопросе</h3>
     <h5>Обазательный агрумент: id вопроса</h5>
