@@ -17,11 +17,14 @@
     }</p>
     <p class="text-secondary">В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}</p>
 </div>
-<div>
-    '/api/users'
-    Возвращает json объект со всеми пользователями, зарегистрированными в системе
 
-    Формат ответа:
+
+
+<div>
+    <h2><a href="/api/users">/api/users</a></h2>
+    <h3 class="h4">Возвращает json объект со всеми пользователями, зарегистрированными в системе</h3>
+
+    <p style="white-space: pre;" class="mb-0"><span class="fw-bold">Формат ответа:</span>
     {
         'users': [
             {
@@ -32,9 +35,131 @@
                 'admin': ...                (int)
             }, ...
         ]
-    }
+    }</p>
+    <p class="text-secondary">В случае отсутствия пользователей возвращает ответ: {'error': 'Not found'}</p>
+</div>
 
-    В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}
+
+
+<div>
+    <h2>/api/question/&lt;int:id&gt;</h2>
+    <h3 class="h4">Возвращает json, содержащий информацию о конкретном вопросе</h3>
+    <h5>Обазательный агрумент: id вопроса</h5>
+    <p style="white-space: pre;" class="mb-0"><span class="fw-bold">Формат ответа:</span>
+    {
+        'question': [
+                {
+                'id': ...,              (int)
+                'text': ...,            (str)
+                'choice_1': ...,        (str)
+                'choice_2': ...,        (str)
+                'created_date': ...     (datetime)
+            }
+        ]
+    }</p>
+    <p class="text-secondary">В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}</p>
+</div>
+
+
+
+<div>
+    <h2>/api/user/&lt;int:id&gt;</h2>
+    <h3 class="h4">Возвращает json, содержащий информацию о конкретном пользователе</h3>
+    <h5>Обазательный агрумент: id пользователя</h5>
+    <p style="white-space: pre;" class="mb-0"><span class="fw-bold">Формат ответа:</span>
+    {
+        'user': {
+            'id': ...,                  (int)
+            'name': ...,                (str)
+            'email': ...,               (str)
+            'created_date': ...,        (datetime)
+            'admin': ...                (int)
+        }
+    }</p>
+    <p class="text-secondary">В случае отсутствия пользователя возвращает ответ: {'error': 'Not found'}</p>
+</div>
+
+
+
+<div>
+    <h2>/api/user/&lt;int:id&gt;/answers</h2>
+    <h3 class="h4">Возвращает json объект со всеми ответами, которые оставил пользователь</h3>
+    <h5>Обазательный агрумент: id пользователя</h5>
+    <p style="white-space: pre;" class="mb-0"><span class="fw-bold">Формат ответа:</span>
+    {
+        'answers': [
+            {
+                'id': ...,              (int)
+                'text': ...,            (str)
+                'choice_1': ...,        (str)
+                'choice_2': ...,        (str)
+                'created_date': ...     (datetime)
+            }, ...
+        ],
+        'user': {
+            'id': ...,                  (int)
+            'name': ...,                (str)
+            'email': ...,               (str)
+            'created_date': ...,        (datetime)
+            'admin': ...                (int)
+        }
+    }</p>
+    <p class="text-secondary">В случае отсутствия ответов возвращает ответ: {'error': 'Not found'}</p>
+</div>
+
+
+
+<div>
+    <h2>/api/user/&lt;int:id&gt;/comments</h2>
+    <h3 class="h4">Возвращает json объект со всеми комментариями, которые оставил конкретный пользователь</h3>
+    <h5>Обазательный агрумент: id пользователя</h5>
+    <p style="white-space: pre;" class="mb-0"><span class="fw-bold">Формат ответа:</span>
+    {
+        'comments': [
+            {
+                'id': ...,              (int)
+                'text': ...,            (str)
+                'user_id': ...,         (int)
+                'question_id': ...,     (int)
+                'created_date': ...,    (datetime)
+                'likes_count': ...      (int)
+            }, ...
+        ],
+        'user': {
+            'id': ...,                  (int)
+            'name': ...,                (str)
+            'email': ...,               (str)
+            'created_date': ...,        (datetime)
+            'admin': ...                (int)
+        }
+    }</p>
+    <p class="text-secondary">В случае отсутствия комментариев возвращает ответ: {'error': 'Not found'}</p>
+</div>
+
+
+
+<div>
+    <h2>/api/user/&lt;int:id&gt;/likes</h2>
+    <h3 class="h4">Возвращает json объект со всеми лайками, которые оставил конкретный пользователь</h3>
+    <h5>Обазательный агрумент: id пользователя</h5>
+    <p style="white-space: pre;" class="mb-0"><span class="fw-bold">Формат ответа:</span>
+    {
+        'likes': [
+            {
+                'id': ...,              (int)
+                'user_id': ...,         (int)
+                'comment_id': ...       (int)
+            }, ...
+        ],
+        'user': {
+            'id': ...,                  (int)
+            'name': ...,                (str)
+            'email': ...,               (str)
+            'created_date': ...,        (datetime)
+            'admin': ...                (int)
+        }
+    }</p>
+    <p class="text-secondary">В случае отсутствия лайков возвращает ответ: {'error': 'Not found'}</p>
 </div>
 
 

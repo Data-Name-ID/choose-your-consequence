@@ -77,7 +77,7 @@ def get_users():
         ]
     }
 
-    В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}
+    В случае отсутствия пользователей возвращает ответ: {'error': 'Not found'}
     """
     db_sess = db_session.create_session()
     users = db_sess.query(User).all()
@@ -147,7 +147,7 @@ def get_user(id):
         }
     }
 
-    В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}
+    В случае отсутствия пользователя возвращает ответ: {'error': 'Not found'}
     """
     db_sess = db_session.create_session()
     user = db_sess.query(User).get(id)
@@ -185,7 +185,7 @@ def get_user_questions(id):
         }
     }
 
-    В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}
+    В случае отсутствия ответов возвращает ответ: {'error': 'Not found'}
     """
     db_sess = db_session.create_session()
     user = db_sess.query(User).get(id)
@@ -240,7 +240,7 @@ def get_user_comments(id):
         }
     }
 
-    В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}
+    В случае отсутствия комментариев возвращает ответ: {'error': 'Not found'}
     """
     db_sess = db_session.create_session()
     comments = db_sess.query(Comment).filter(Comment.user_id == id)
@@ -294,7 +294,7 @@ def get_user_likes(id):
         }
     }
 
-    В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}
+    В случае отсутствия лайков возвращает ответ: {'error': 'Not found'}
     """
     db_sess = db_session.create_session()
     comments = db_sess.query(Like).filter(Comment.user_id == id)
