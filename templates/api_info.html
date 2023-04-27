@@ -1,9 +1,9 @@
 {% extends "base.html" %} {% block main %}
 <div>
-    <a>'/api/questions'
-    Возвращает json объект со всеми вопросами, внесёнными в базу данных
+    <h2><a href="/api/questions">/api/questions</a></h2>
+    <h3 class="h4">Возвращает json объект со всеми вопросами, внесёнными в базу данных</h3>
 
-    Формат ответа:
+    <p style="white-space: pre;" class="mb-0"><span class="fw-bold">Формат ответа:</span>
     {
         'questions': [
             {
@@ -14,9 +14,8 @@
                 'created_date': ...     (datetime)
             }, ...
         ]
-    }
-
-    В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}</a>
+    }</p>
+    <p class="text-secondary">В случае отсутствия вопросов возвращает ответ: {'error': 'Not found'}</p>
 </div>
 <div>
     '/api/users'

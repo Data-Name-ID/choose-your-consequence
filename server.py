@@ -31,6 +31,7 @@ import os
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = SECRET_KEY
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -479,7 +480,7 @@ def main() -> None:
 
     db_session.global_init("db/app.db")
     app.register_blueprint(api.blueprint)
-    app.run()
+    app.run(debug=True)
 
 
 if __name__ == "__main__":
